@@ -80,9 +80,14 @@ const RegisterScreen = (props) => {
           justifyContent: 'center',
         }}>
         <Image
-            source={require('./Image/aboutreact.png')}s
-          style={{height: 150, resizeMode: 'contain', alignSelf: 'center'}}
-        />
+            source={require('./Image/success.png')}
+            style={{
+              width: '50%',
+              height: 100,
+              resizeMode: 'contain',
+              margin: 30,
+            }}
+          />
         <Text style={styles.successTextStyle}>Registration Successful.</Text>
         <TouchableOpacity
           style={styles.buttonStyle}
