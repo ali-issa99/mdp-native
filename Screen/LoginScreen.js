@@ -38,32 +38,28 @@ const LoginScreen = ({navigation}) => {
       return;
     }
     setLoading(true);
-    let dataToSend = {user_email: userEmail, user_password: userPassword};
-    let formBody = [];
-    for (let key in dataToSend) {
-      let encodedKey = encodeURIComponent(key);
-      let encodedValue = encodeURIComponent(dataToSend[key]);
-      formBody.push(encodedKey + '=' + encodedValue);
-    }
-    formBody = formBody.join('&');
+    let dataToSend = {username: userEmail, password: userPassword};
+
+   
+   
 
     fetch('http://localhost:9000/users/login', {
+  
       method: 'POST',
-      body: formBody,
-      headers: {
-        //Header Defination
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      headers: { 
+          'Content-Type':'application/json' 
       },
-    })
+      body: JSON.stringify(dataToSend)
+     })
       .then((response) => response.json())
-      .then((responseJson) => {
+      .then((response) => {
         //Hide Loader
         setLoading(false);
-        console.log(responseJson);
+   
         // If server response message same as Data Matched
-        if (responseJson.status == 1) {
-          AsyncStorage.setItem('user_id', responseJson.data[0].user_id);
-          console.log(responseJson.data[0].user_id);
+        if (response.success) {
+          AsyncStorage.setItem('token', response.token);
+          AsyncStorage.setItem('creds', JSON.stringify(dataToSend));
           navigation.replace('DrawerNavigationRoutes');
         } else {
           setErrortext('Please check your email id or password');

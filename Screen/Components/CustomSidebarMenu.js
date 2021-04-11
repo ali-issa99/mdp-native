@@ -29,29 +29,30 @@ const CustomSidebarMenu = (props) => {
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
         <DrawerItem
-          label={({color}) => <Text style={{color: '#d8d8d8'}}>Logout</Text>}
+          label={({color}) => <Text style={{color: '#d8d8d8'}}>Logout123</Text>}
           onPress={() => {
-            props.navigation.toggleDrawer();
-            Alert.alert(
-              'Logout',
-              'Are you sure? You want to logout?',
-              [
-                {
-                  text: 'Cancel',
-                  onPress: () => {
-                    return null;
-                  },
-                },
-                {
-                  text: 'Confirm',
-                  onPress: () => {
-                    AsyncStorage.clear();
-                    props.navigation.replace('Auth');
-                  },
-                },
-              ],
-              {cancelable: false},
-            );
+            //props.navigation.toggleDrawer();
+            if (window.confirm('Are you sure you wish to log out?')) {AsyncStorage.clear(); props.navigation.replace('Auth');}
+            // Alert.alert(
+            //   'Logout',
+            //   'Are you sure? You want to logout?',
+            //   [
+            //     {
+            //       text: 'Cancel',
+            //       onPress: () => {
+            //         return null;
+            //       },
+            //     },
+            //     {
+            //       text: 'Confirm',
+            //       onPress: () => {
+            //         AsyncStorage.clear();
+            //         props.navigation.replace('Auth');
+            //       },
+            //     },
+            //   ],
+            //   {cancelable: false},
+            // );
           }}
         />
       </DrawerContentScrollView>

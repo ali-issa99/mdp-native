@@ -19,17 +19,14 @@ import Loader from './Components/Loader';
 
 const RegisterScreen = (props) => {
   const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [userAge, setUserAge] = useState('');
-  const [userAddress, setUserAddress] = useState('');
+  const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
   const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
 
-  const nameInputRef = createRef();
-  const emailInputRef = createRef();
-  const ageInputRef = createRef();
-  const addressInputRef = createRef();
+
+  const passwordInputRef = createRef();
+
 
   const handleSubmitButton = () => {
     setErrortext('');
@@ -37,40 +34,22 @@ const RegisterScreen = (props) => {
       alert('Please fill Name');
       return;
     }
-    if (!userEmail) {
+    if (!userPassword) {
       alert('Please fill Email');
       return;
     }
-    if (!userAge) {
-      alert('Please fill Age');
-      return;
-    }
-    if (!userAddress) {
-      alert('Please fill Address');
-      return;
-    }
+    
     //Show Loader
     setLoading(true);
-    var dataToSend = {
-      user_name: userName,
-      user_email: userEmail,
-      user_age: userAge,
-      user_address: userAddress,
-    };
-    var formBody = [];
-    for (var key in dataToSend) {
-      var encodedKey = encodeURIComponent(key);
-      var encodedValue = encodeURIComponent(dataToSend[key]);
-      formBody.push(encodedKey + '=' + encodedValue);
-    }
-    formBody = formBody.join('&');
+    let dataToSend = {username: userName, password: userPassword};
+ 
 
-    fetch('https://aboutreact.herokuapp.com/register.php', {
+    fetch('http://localhost:9000/users/signup', {
       method: 'POST',
-      body: formBody,
+      body: JSON.stringify(dataToSend),
       headers: {
         //Header Defination
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Content-Type':'application/json' ,
       },
     })
       .then((response) => response.json())
@@ -79,7 +58,7 @@ const RegisterScreen = (props) => {
         setLoading(false);
         console.log(responseJson);
         // If server response message same as Data Matched
-        if (responseJson.status == 1) {
+        if (responseJson.success) {
           setIsRegistraionSuccess(true);
           console.log('Registration Successful. Please Login to proceed');
         } else {
@@ -101,7 +80,7 @@ const RegisterScreen = (props) => {
           justifyContent: 'center',
         }}>
         <Image
-          source={require('./Image/success.png')}
+            source={require('./Image/aboutreact.png')}s
           style={{height: 150, resizeMode: 'contain', alignSelf: 'center'}}
         />
         <Text style={styles.successTextStyle}>Registration Successful.</Text>
@@ -144,58 +123,27 @@ const RegisterScreen = (props) => {
               placeholderTextColor="#8b9cb5"
               autoCapitalize="sentences"
               returnKeyType="next"
-              onSubmitEditing={() =>
-                emailInputRef.current && emailInputRef.current.focus()
-              }
+              // onSubmitEditing={() =>
+              // emailInputRef.current && emailInputRef.current.focus()
+              // }
               blurOnSubmit={false}
             />
           </View>
           <View style={styles.SectionStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              onChangeText={(UserEmail) => setUserEmail(UserEmail)}
-              underlineColorAndroid="#f000"
-              placeholder="Enter Email"
-              placeholderTextColor="#8b9cb5"
-              keyboardType="email-address"
-              ref={emailInputRef}
-              returnKeyType="next"
-              onSubmitEditing={() =>
-                ageInputRef.current && ageInputRef.current.focus()
-              }
-              blurOnSubmit={false}
-            />
-          </View>
-          <View style={styles.SectionStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              onChangeText={(UserAge) => setUserAge(UserAge)}
-              underlineColorAndroid="#f000"
-              placeholder="Enter Age"
-              placeholderTextColor="#8b9cb5"
-              keyboardType="numeric"
-              ref={ageInputRef}
-              returnKeyType="next"
-              onSubmitEditing={() =>
-                addressInputRef.current && addressInputRef.current.focus()
-              }
-              blurOnSubmit={false}
-            />
-          </View>
-          <View style={styles.SectionStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              onChangeText={(UserAddress) => setUserAddress(UserAddress)}
-              underlineColorAndroid="#f000"
-              placeholder="Enter Address"
-              placeholderTextColor="#8b9cb5"
-              autoCapitalize="sentences"
-              ref={addressInputRef}
-              returnKeyType="next"
-              onSubmitEditing={Keyboard.dismiss}
-              blurOnSubmit={false}
-            />
-          </View>
+              <TextInput
+                style={styles.inputStyle}
+                onChangeText={(UserPassword) => setUserPassword(UserPassword)}
+                placeholder="Enter Password" //12345
+                placeholderTextColor="#8b9cb5"
+                keyboardType="default"
+                ref={passwordInputRef}
+                onSubmitEditing={Keyboard.dismiss}
+                blurOnSubmit={false}
+                secureTextEntry={true}
+                underlineColorAndroid="#f000"
+                returnKeyType="next"
+              />
+            </View>      
           {errortext != '' ? (
             <Text style={styles.errorTextStyle}> {errortext} </Text>
           ) : null}
