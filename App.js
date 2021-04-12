@@ -6,31 +6,41 @@ import 'react-native-gesture-handler';
 import React from 'react';
 
 // Import Navigators from React Navigation
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
+import {createDrawerNavigator} from '@react-navigation/drawer';
 // Import Screens
-import SplashScreen from './Screen/SplashScreen';
-import LoginScreen from './Screen/LoginScreen';
-import RegisterScreen from './Screen/RegisterScreen';
-import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
+
+
+import SplashScreen from './Screen/Components/SplashScreen';
+import LoginScreen from './Screen/Components/LoginScreen';
+import RegisterScreen from './Screen/Components/signup';
+import Home from './Screen/Components/HomeScreen';
+import statistics from './Screen/Components/statistics';
+import NavigationDrawerHeader from './Screen/Components/NavigationDrawerHeader';
+
+import CustomSidebarMenu from './Screen/Components/CustomSidebarMenu';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
-const Auth = () => {
-  // Stack Navigator for Login and Sign up Screen
+
+
+
+
+const homeScreenStack = ({navigation}) => {
   return (
-    <Stack.Navigator initialRouteName="LoginScreen">
+    <Stack.Navigator initialRouteName="home">
       <Stack.Screen
-        name="LoginScreen"
-        component={LoginScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="RegisterScreen"
-        component={RegisterScreen}
+        name="HomeScreen"
+        component={Home}
         options={{
-          title: 'Register', //Set Header Title
+          title: 'Home', //Set Header Title
+         
+          headerLeft: () => (
+            <NavigationDrawerHeader navigationProps={navigation} />
+          ),
           headerStyle: {
             backgroundColor: '#307ecc', //Set Header color
           },
@@ -44,107 +54,116 @@ const Auth = () => {
   );
 };
 
+const settingScreenStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      initialRouteName="SettingsScreen12"
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerHeader navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: '#307ecc', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+        },
+      }}>
+      <Stack.Screen
+        name="Stats"
+        component={statistics}
+        options={{
+          title: 'Settings', //Set Header Title
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const accessedpages = (props) => {
+  return (
+    <Drawer.Navigator
+      drawerContentOptions={{
+        activeTintColor: '#cee1f2',
+        color: '#cee1f2',
+        itemStyle: {marginVertical: 5, color: 'white'},
+        labelStyle: {
+          color: '#d8d8d8',
+        },
+      }}
+      screenOptions={{headerShown: false}}
+      drawerContent={CustomSidebarMenu}>
+      <Drawer.Screen
+        name="homeScreenStack"
+        options={{drawerLabel: 'Home Screen'}}
+        component={homeScreenStack}
+      />
+      <Drawer.Screen
+        name="settingScreenStack"
+        options={{drawerLabel: 'Setting Screen'}}
+        component={settingScreenStack}
+      />
+    </Drawer.Navigator>
+  );
+};
+
+
+
 const App = () => {
   return (
+   
+
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen">
-        {/* SplashScreen which will come once for 5 Seconds */}
+       
+      
+      <Stack.Navigator initialRouteName="login">
+
         <Stack.Screen
-          name="SplashScreen"
+          name="intropage"
           component={SplashScreen}
-          // Hiding header for Splash Screen
-          options={{headerShown: false}}
+
+          options={{ headerShown: false }}
         />
-        {/* Auth Navigator: Include Login and Signup */}
+
         <Stack.Screen
-          name="Auth"
-          component={Auth}
-          options={{headerShown: false}}
+          name="login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
         />
-        {/* Navigation Drawer as a landing page */}
         <Stack.Screen
-          name="DrawerNavigationRoutes"
-          component={DrawerNavigationRoutes}
+          name="signup"
+          component={RegisterScreen}
+          options={{
+            title: 'Register', //Set Header Title
+            headerStyle: {
+              backgroundColor: '#307ecc', //Set Header color
+            },
+            headerTintColor: '#fff', //Set Header text color
+            headerTitleStyle: {
+              fontWeight: 'bold', //Set Header text style
+            },
+          }}
+        />
+         <Stack.Screen
+          name="accessedpages"
+          component={accessedpages}
           // Hiding header for Navigation Drawer
           options={{headerShown: false}}
         />
+
+       
       </Stack.Navigator>
     </NavigationContainer>
-  );
+
+  )
 };
+
+
+
+
 
 export default App;
 
 
 
-// const login = () => {
-//   // Stack Navigator for Login and Sign up Screen
-//   return (
-//     <Stack.Navigator initialRouteName="LoginScreen">
-//       <Stack.Screen
-//         name="LoginScreen"
-//         component={LoginScreen}
-//         options={{headerShown: false}}
-
-//       />
-//       </Stack.Navigator>
-
-//   )}
-
-//   const signup = () => {
-//     // Stack Navigator for Login and Sign up Screen
-//     return (
-//       <Stack.Navigator initialRouteName="LoginScreen">
-//         <Stack.Screen
-//         name="RegisterScreen"
-//         component={RegisterScreen}
-//         options={{
-//           title: 'Register', //Set Header Title
-//           headerStyle: {
-//             backgroundColor: '#307ecc', //Set Header color
-//           },
-//           headerTintColor: '#fff', //Set Header text color
-//           headerTitleStyle: {
-//             fontWeight: 'bold', //Set Header text style
-//           },
-//         }}
-//       />
-//       </Stack.Navigator>    
-//   );
-// };
-
-// const App = () => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator initialRouteName="SplashScreen">
-//         {/* SplashScreen which will come once for 5 Seconds */}
-//         <Stack.Screen
-//           name="SplashScreen"
-//           component={SplashScreen}
-//           // Hiding header for Splash Screen
-//           options={{headerShown: false}}
-//         />
-//         {/* Auth Navigator: Include Login and Signup */}
-//         <Stack.Screen
-//           name="login"
-//           component={login}
-//           options={{headerShown: false}}
-//         />
-//         <Stack.Screen
-//           name="signup"
-//           component={signup}
-//           options={{headerShown: false}}
-//         />
-//         {/* Navigation Drawer as a landing page */}
-//         <Stack.Screen
-//           name="DrawerNavigationRoutes"
-//           component={DrawerNavigationRoutes}
-//           // Hiding header for Navigation Drawer
-//           options={{headerShown: false}}
-//         />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
-
-// export default App;

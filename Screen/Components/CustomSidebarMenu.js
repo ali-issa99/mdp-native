@@ -19,10 +19,10 @@ const CustomSidebarMenu = (props) => {
       <View style={stylesSidebar.profileHeader}>
         <View style={stylesSidebar.profileHeaderPicCircle}>
           <Text style={{fontSize: 25, color: '#307ecc'}}>
-            {'About React'.charAt(0)}
+             
           </Text>
         </View>
-        <Text style={stylesSidebar.profileHeaderText}>AboutReact</Text>
+        <Text style={stylesSidebar.profileHeaderText}>hello</Text>
       </View>
       <View style={stylesSidebar.profileHeaderLine} />
 
@@ -32,7 +32,7 @@ const CustomSidebarMenu = (props) => {
           label={({color}) => <Text style={{color: '#d8d8d8'}}>Logout123</Text>}
           onPress={() => {
             //props.navigation.toggleDrawer();
-            if (window.confirm('Are you sure you wish to log out?')) {AsyncStorage.clear(); props.navigation.replace('Auth');}
+            if (window.confirm('Are you sure you wish to log out?')) {AsyncStorage.clear(); props.navigation.navigate('login');}
             // Alert.alert(
             //   'Logout',
             //   'Are you sure? You want to logout?',

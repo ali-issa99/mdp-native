@@ -2,7 +2,7 @@
 // https://aboutreact.com/react-native-login-and-signup/
 
 // Import React and Component
-import React, {useState, createRef} from 'react';
+import React, { useState, createRef } from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -17,9 +17,11 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-import Loader from './Components/Loader';
 
-const LoginScreen = ({navigation}) => {
+
+const LoginScreen = ({ navigation }) => {
+
+  
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -38,31 +40,30 @@ const LoginScreen = ({navigation}) => {
       return;
     }
     setLoading(true);
-    let dataToSend = {username: userEmail, password: userPassword};
+    let dataToSend = { username: userEmail, password: userPassword };
 
-   
-   
+
 
     fetch('http://localhost:9000/users/login', {
-  
       method: 'POST',
-      headers: { 
-          'Content-Type':'application/json' 
+      headers: {
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(dataToSend)
-     })
+    })
       .then((response) => response.json())
       .then((response) => {
-        //Hide Loader
-        setLoading(false);
-   
+      
         // If server response message same as Data Matched
         if (response.success) {
           AsyncStorage.setItem('token', response.token);
           AsyncStorage.setItem('creds', JSON.stringify(dataToSend));
-          navigation.replace('DrawerNavigationRoutes');
-        } else {
-          setErrortext('Please check your email id or password');
+          AsyncStorage.setItem('user',dataToSend.username);
+          //AsyncStorage.setItem('user', dataToSend.username.toString);
+          navigation.navigate('accessedpages');
+        }else {
+          alert(response.status)
+          // setErrortext(response.msg);
           console.log('Please check your email id or password');
         }
       })
@@ -75,7 +76,7 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <View style={styles.mainBody}>
-      <Loader loading={loading} />
+
       <ScrollView
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
@@ -85,9 +86,9 @@ const LoginScreen = ({navigation}) => {
         }}>
         <View>
           <KeyboardAvoidingView enabled>
-            <View style={{alignItems: 'center'}}>
+            <View style={{ alignItems: 'center' }}>
               <Image
-                source={require('./Image/aboutreact.png')}
+                source={require('../Image/aboutreact.png')}
                 style={{
                   width: '50%',
                   height: 100,
@@ -99,14 +100,17 @@ const LoginScreen = ({navigation}) => {
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
-                onChangeText={(UserEmail) => setUserEmail(UserEmail)}
+                onChangeText={(UserEmail) =>
+                  setUserEmail(UserEmail)
+                }
                 placeholder="Enter Email" //dummy@abc.com
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
-                // keyboardType="email-address"
+                keyboardType="email-address"
                 returnKeyType="next"
                 onSubmitEditing={() =>
-                  passwordInputRef.current && passwordInputRef.current.focus()
+                  passwordInputRef.current &&
+                  passwordInputRef.current.focus()
                 }
                 underlineColorAndroid="#f000"
                 blurOnSubmit={false}
@@ -115,7 +119,9 @@ const LoginScreen = ({navigation}) => {
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
-                onChangeText={(UserPassword) => setUserPassword(UserPassword)}
+                onChangeText={(UserPassword) =>
+                  setUserPassword(UserPassword)
+                }
                 placeholder="Enter Password" //12345
                 placeholderTextColor="#8b9cb5"
                 keyboardType="default"
@@ -128,7 +134,9 @@ const LoginScreen = ({navigation}) => {
               />
             </View>
             {errortext != '' ? (
-              <Text style={styles.errorTextStyle}> {errortext} </Text>
+              <Text style={styles.errorTextStyle}>
+                {errortext}
+              </Text>
             ) : null}
             <TouchableOpacity
               style={styles.buttonStyle}
@@ -138,7 +146,7 @@ const LoginScreen = ({navigation}) => {
             </TouchableOpacity>
             <Text
               style={styles.registerTextStyle}
-              onPress={() => navigation.navigate('RegisterScreen')}>
+              onPress={() => navigation.navigate('signup')}>
               New Here ? Register
             </Text>
           </KeyboardAvoidingView>
@@ -205,3 +213,52 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

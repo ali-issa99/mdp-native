@@ -15,12 +15,9 @@ import {
   ScrollView,
 } from 'react-native';
 
-import Loader from './Components/Loader';
-
 const RegisterScreen = (props) => {
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
   const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
 
@@ -40,7 +37,7 @@ const RegisterScreen = (props) => {
     }
     
     //Show Loader
-    setLoading(true);
+    
     let dataToSend = {username: userName, password: userPassword};
  
 
@@ -55,7 +52,7 @@ const RegisterScreen = (props) => {
       .then((response) => response.json())
       .then((responseJson) => {
         //Hide Loader
-        setLoading(false);
+      
         console.log(responseJson);
         // If server response message same as Data Matched
         if (responseJson.success) {
@@ -80,19 +77,20 @@ const RegisterScreen = (props) => {
           justifyContent: 'center',
         }}>
         <Image
-            source={require('./Image/success.png')}
+            source={require('../Image/success.png')}
             style={{
               width: '50%',
               height: 100,
+                  margin: 30,
               resizeMode: 'contain',
-              margin: 30,
+              alignSelf: 'center'
             }}
           />
         <Text style={styles.successTextStyle}>Registration Successful.</Text>
         <TouchableOpacity
           style={styles.buttonStyle}
           activeOpacity={0.5}
-          onPress={() => props.navigation.navigate('LoginScreen')}>
+          onPress={() => props.navigation.navigate('login')}>
           <Text style={styles.buttonTextStyle}>Login Now</Text>
         </TouchableOpacity>
       </View>
@@ -100,7 +98,7 @@ const RegisterScreen = (props) => {
   }
   return (
     <View style={{flex: 1, backgroundColor: '#307ecc'}}>
-      <Loader loading={loading} />
+     
       <ScrollView
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
@@ -109,7 +107,7 @@ const RegisterScreen = (props) => {
         }}>
         <View style={{alignItems: 'center'}}>
           <Image
-            source={require('./Image/aboutreact.png')}
+            source={require('../Image/aboutreact.png')}
             style={{
               width: '50%',
               height: 100,
@@ -128,9 +126,7 @@ const RegisterScreen = (props) => {
               placeholderTextColor="#8b9cb5"
               autoCapitalize="sentences"
               returnKeyType="next"
-              // onSubmitEditing={() =>
-              // emailInputRef.current && emailInputRef.current.focus()
-              // }
+         
               blurOnSubmit={false}
             />
           </View>
