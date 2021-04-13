@@ -54,48 +54,29 @@ const LoginScreen = ({ navigation }) => {
         'Content-Type':'application/json' ,
       },
     })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        //Hide Loader
+        .then((response) => response.json())
+      .then((response) => {
       
-        console.log(responseJson);
         // If server response message same as Data Matched
-        if (responseJson.success) {
+        if (response.success) {
+          AsyncStorage.setItem('token', response.token);
+      
+          AsyncStorage.setItem('user',dataToSend.username);
          
-          console.log('Registration Successful. Please Login to proceed');
-        } else {
-          setErrortext('Please choose another username');
+
+          navigation.navigate('accessedpages');
+        }else {
+          alert(response.status)
+          setErrortext('Please check your email id or password');
+          // console.log('Please check your email id or password');
         }
       })
       .catch((error) => {
-      
-      
+        //Hide Loader
+        setLoading(false);
         console.error(error);
       });
   };
-  //     .then((response) => response.json())
-  //     .then((response) => {
-      
-  //       // If server response message same as Data Matched
-  //       if (response.success) {
-  //         AsyncStorage.setItem('token', response.token);
-  //         AsyncStorage.setItem('creds', JSON.stringify(dataToSend));
-  //         AsyncStorage.setItem('user',dataToSend.username);
-         
-
-  //         navigation.navigate('accessedpages');
-  //       }else {
-  //         alert(response.status)
-  //         setErrortext('Please check your email id or password');
-  //         // console.log('Please check your email id or password');
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       //Hide Loader
-  //       setLoading(false);
-  //       console.error(error);
-  //     });
-  // };
 
   return (
     <View style={styles.mainBody}>
@@ -133,7 +114,7 @@ const LoginScreen = ({ navigation }) => {
                 placeholder="Enter username" //dummy@abc.com
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
-                keyboardType="dfault"
+                keyboardType="email-address"
                 returnKeyType="next"
                 onSubmitEditing={() =>
                   passwordInputRef.current &&
