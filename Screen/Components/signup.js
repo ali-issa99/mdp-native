@@ -41,7 +41,7 @@ const RegisterScreen = (props) => {
     let dataToSend = {username: userName, password: userPassword};
  
 
-    fetch('http://localhost:9000/users/signup', {
+    fetch('http://192.168.1.3:9000/users/signup', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
       headers: {
@@ -59,12 +59,12 @@ const RegisterScreen = (props) => {
           setIsRegistraionSuccess(true);
           console.log('Registration Successful. Please Login to proceed');
         } else {
-          setErrortext('Registration Unsuccessful');
+          setErrortext('Please choose another username');
         }
       })
       .catch((error) => {
         //Hide Loader
-        setLoading(false);
+      
         console.error(error);
       });
   };
@@ -97,56 +97,72 @@ const RegisterScreen = (props) => {
     );
   }
   return (
-    <View style={{flex: 1, backgroundColor: '#307ecc'}}>
-     
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}>
-        <View style={{alignItems: 'center'}}>
-          <Image
-            source={require('../Image/aboutreact.png')}
-            style={{
-              width: '50%',
-              height: 100,
-              resizeMode: 'contain',
-              margin: 30,
-            }}
-          />
-        </View>
+    <View style={styles.mainBody}>
+
+    <ScrollView
+      keyboardShouldPersistTaps="handled"
+      contentContainerStyle={{
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+      }}>
+      <View>
         <KeyboardAvoidingView enabled>
+          <View style={{ alignItems: 'center' }}>
+            <Image
+              source={require('../Image/robot3.png')}
+              style={{                
+                width: 150,
+                height: 150,
+                borderRadius: 100 / 2,
+            
+                backgroundColor: '#ffffff',
+           
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            />
+          </View>
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(UserName) => setUserName(UserName)}
-              underlineColorAndroid="#f000"
-              placeholder="Enter Name"
+              onChangeText={(UserEmail) =>
+                setUserName(UserEmail)
+              }
+              placeholder="Enter username" //dummy@abc.com
               placeholderTextColor="#8b9cb5"
-              autoCapitalize="sentences"
+              autoCapitalize="none"
+              keyboardType="email-address"
               returnKeyType="next"
-         
+              onSubmitEditing={() =>
+                passwordInputRef.current &&
+                passwordInputRef.current.focus()
+              }
+              underlineColorAndroid="#f000"
               blurOnSubmit={false}
             />
           </View>
           <View style={styles.SectionStyle}>
-              <TextInput
-                style={styles.inputStyle}
-                onChangeText={(UserPassword) => setUserPassword(UserPassword)}
-                placeholder="Enter Password" //12345
-                placeholderTextColor="#8b9cb5"
-                keyboardType="default"
-                ref={passwordInputRef}
-                onSubmitEditing={Keyboard.dismiss}
-                blurOnSubmit={false}
-                secureTextEntry={true}
-                underlineColorAndroid="#f000"
-                returnKeyType="next"
-              />
-            </View>      
+            <TextInput
+              style={styles.inputStyle}
+              onChangeText={(UserPassword) =>
+                setUserPassword(UserPassword)
+              }
+              placeholder="Enter Password" //12345
+              placeholderTextColor="#8b9cb5"
+              keyboardType="default"
+              ref={passwordInputRef}
+              onSubmitEditing={Keyboard.dismiss}
+              blurOnSubmit={false}
+              secureTextEntry={true}
+              underlineColorAndroid="#f000"
+              returnKeyType="next"
+            />
+          </View>
           {errortext != '' ? (
-            <Text style={styles.errorTextStyle}> {errortext} </Text>
+            <Text style={styles.errorTextStyle}>
+              {errortext}
+            </Text>
           ) : null}
           <TouchableOpacity
             style={styles.buttonStyle}
@@ -155,6 +171,7 @@ const RegisterScreen = (props) => {
             <Text style={styles.buttonTextStyle}>REGISTER</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
+        </View>
       </ScrollView>
     </View>
   );
@@ -162,6 +179,12 @@ const RegisterScreen = (props) => {
 export default RegisterScreen;
 
 const styles = StyleSheet.create({
+  mainBody: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#ffff',
+    alignContent: 'center',
+  },
   SectionStyle: {
     flexDirection: 'row',
     height: 40,
@@ -171,7 +194,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: '#7DE24E',
+    backgroundColor: '#2196f3',
     borderWidth: 0,
     color: '#FFFFFF',
     borderColor: '#7DE24E',
@@ -181,7 +204,7 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 25,
   },
   buttonTextStyle: {
     color: '#FFFFFF',
@@ -190,22 +213,25 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     flex: 1,
-    color: 'white',
+    color: 'black',
     paddingLeft: 15,
     paddingRight: 15,
     borderWidth: 1,
     borderRadius: 30,
     borderColor: '#dadae8',
   },
+  registerTextStyle: {
+    color: '#2196f3',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 14,
+    alignSelf: 'center',
+    padding: 10,
+  },
   errorTextStyle: {
     color: 'red',
     textAlign: 'center',
     fontSize: 14,
   },
-  successTextStyle: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 18,
-    padding: 30,
-  },
 });
+

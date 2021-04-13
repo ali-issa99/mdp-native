@@ -18,16 +18,16 @@ const SplashScreen = ({navigation}) => {
       //If not then send for Authentication
       //else send to Home Screen
       AsyncStorage.getItem('username').then((value) =>
-        navigation.replace(value === null ? 'Auth' : 'DrawerNavigationRoutes'),
+        navigation.navigate(value === null ? 'login' : 'Home'),
       );
-    }, 5000);
+    }, 4000);
   }, []);
 
   return (
     <View style={styles.container}>
       <Image
-        source={require('../Image/aboutreact.png')}
-        style={{width: '90%', resizeMode: 'contain', margin: 30}}
+        source={require('../Image/robotwelcome.png')}
+        style={{width: '100%'}}
       />
       <ActivityIndicator
         animating={animating}
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#307ecc',
+    backgroundColor: '#ffffff',
   },
   activityIndicator: {
     alignItems: 'center',

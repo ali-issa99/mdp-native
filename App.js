@@ -31,9 +31,9 @@ const Drawer = createDrawerNavigator();
 
 const homeScreenStack = ({navigation}) => {
   return (
-    <Stack.Navigator initialRouteName="home">
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
-        name="HomeScreen"
+        name="Home"
         component={Home}
         options={{
           title: 'Home', //Set Header Title
@@ -74,7 +74,7 @@ const settingScreenStack = ({navigation}) => {
         name="Stats"
         component={statistics}
         options={{
-          title: 'Settings', //Set Header Title
+          title: 'Stats', //Set Header Title
         }}
       />
     </Stack.Navigator>
@@ -96,12 +96,12 @@ const accessedpages = (props) => {
       drawerContent={CustomSidebarMenu}>
       <Drawer.Screen
         name="homeScreenStack"
-        options={{drawerLabel: 'Home Screen'}}
+        options={{drawerLabel: 'Home'}}
         component={homeScreenStack}
       />
       <Drawer.Screen
         name="settingScreenStack"
-        options={{drawerLabel: 'Setting Screen'}}
+        options={{drawerLabel: 'Statistics '}}
         component={settingScreenStack}
       />
     </Drawer.Navigator>
@@ -117,7 +117,7 @@ const App = () => {
     <NavigationContainer>
        
       
-      <Stack.Navigator initialRouteName="login">
+      <Stack.Navigator initialRouteName="intrpage">
 
         <Stack.Screen
           name="intropage"
