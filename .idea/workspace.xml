@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db909367-8d1b-481a-9d70-295fa8f843fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screen/Components/CustomSidebarMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screen/Components/CustomSidebarMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Screen/Components/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screen/Components/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screen/Components/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screen/Components/LoginScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screen/Components/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screen/Components/signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,10 +41,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="93" y="93" width="1095" height="495" key="AVDManager" timestamp="1618472887650">
+    <state x="93" y="93" width="1095" height="495" key="AVDManager" timestamp="1618508580450">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="93" y="93" width="1095" height="495" key="AVDManager/0.0.1280.680@0.0.1280.680" timestamp="1618472887650" />
+    <state x="93" y="93" width="1095" height="495" key="AVDManager/0.0.1280.680@0.0.1280.680" timestamp="1618508580450" />
     <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1618471981871">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

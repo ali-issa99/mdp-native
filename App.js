@@ -19,7 +19,7 @@ import RegisterScreen from './Screen/Components/signup';
 import Home from './Screen/Components/HomeScreen';
 import statistics from './Screen/Components/statistics';
 import NavigationDrawerHeader from './Screen/Components/NavigationDrawerHeader';
-
+import Manual from './Screen/Components/manual';
 import CustomSidebarMenu from './Screen/Components/CustomSidebarMenu';
 
 const Stack = createStackNavigator();
@@ -99,6 +99,7 @@ const accessedpages = (props) => {
         options={{drawerLabel: 'Home'}}
         component={homeScreenStack}
       />
+     
       <Drawer.Screen
         name="settingScreenStack"
         options={{drawerLabel: 'Statistics '}}
@@ -123,14 +124,21 @@ const App = () => {
           name="intropage"
           component={SplashScreen}
 
+
           options={{ headerShown: false }}
         />
+          <Drawer.Screen
+          name="Manual"
+          component={Manual}
+          options={{ headerShown: false }}
+      />
 
         <Stack.Screen
           name="login"
           component={LoginScreen}
           options={{ headerShown: false }}
         />
+       
         <Stack.Screen
           name="signup"
           component={RegisterScreen}
