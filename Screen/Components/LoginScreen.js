@@ -46,7 +46,7 @@ const LoginScreen = ({ navigation }) => {
 
 
 
-    fetch('http://192.168.1.3:9000/users/login', {
+    fetch('http://192.168.1.2:9000/users/login', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
       headers: {
@@ -73,7 +73,7 @@ const LoginScreen = ({ navigation }) => {
       })
       .catch((error) => {
         //Hide Loader
-        setLoading(false);
+        // setLoading(false);
         console.error(error);
       });
   };

@@ -49,7 +49,7 @@ const CustomSidebarMenu = (props) => {
       <View style={stylesSidebar.sideMenuContainer}>
         <View style={stylesSidebar.profileHeader}>
           <View style={stylesSidebar.profileHeaderPicCircle}>
-            {/* <Showuser /> */}
+
             <Text style={{ fontSize: 25, color: '#307ecc' }}> 
               <Showuserupper/>
             </Text>

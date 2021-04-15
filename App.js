@@ -112,11 +112,11 @@ const accessedpages = (props) => {
 
 const App = () => {
   return (
-   
+
 
     <NavigationContainer>
-       
-      
+
+
       <Stack.Navigator initialRouteName="intrpage">
 
         <Stack.Screen
@@ -152,7 +152,7 @@ const App = () => {
           options={{headerShown: false}}
         />
 
-       
+
       </Stack.Navigator>
     </NavigationContainer>
 
@@ -164,6 +164,5 @@ const App = () => {
 
 
 export default App;
-
 
 
