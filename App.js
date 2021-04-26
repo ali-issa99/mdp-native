@@ -20,6 +20,7 @@ import Home from './Screen/Components/HomeScreen';
 import statistics from './Screen/Components/statistics';
 import NavigationDrawerHeader from './Screen/Components/NavigationDrawerHeader';
 import Manual from './Screen/Components/manual';
+import Auto from './Screen/Components/auto';
 import CustomSidebarMenu from './Screen/Components/CustomSidebarMenu';
 
 const Stack = createStackNavigator();
@@ -71,7 +72,7 @@ const settingScreenStack = ({navigation}) => {
         },
       }}>
       <Stack.Screen
-        name="Stats"
+        name="Statistics"
         component={statistics}
         options={{
           title: 'Stats', //Set Header Title
@@ -80,6 +81,60 @@ const settingScreenStack = ({navigation}) => {
     </Stack.Navigator>
   );
 };
+const auto=({navigation}) =>{
+
+  return (
+    <Stack.Navigator
+      initialRouteName="Auto"
+      screenOptions={{
+
+        headerStyle: {
+          backgroundColor: '#307ecc', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+        },
+      }}>
+      <Stack.Screen
+        name="Auto"
+        component={Auto}
+        options={{
+          title: 'Manual Mode ', //Set Header Title
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+
+const manualmode=({navigation}) =>{
+
+  return (
+    <Stack.Navigator
+      initialRouteName="Manual"
+      screenOptions={{
+       
+        headerStyle: {
+          backgroundColor: '#307ecc', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+        },
+      }}>
+      <Stack.Screen
+        name="Manual"
+        component={Manual}
+        options={{
+          title: 'Manual Mode ', //Set Header Title
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+
 
 const accessedpages = (props) => {
   return (
@@ -127,10 +182,19 @@ const App = () => {
 
           options={{ headerShown: false }}
         />
-          <Drawer.Screen
+          <Stack.Screen
           name="Manual"
-          component={Manual}
+          component={manualmode}
+
+
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+        name="Auto"
+        component={Auto}
+
+
+        options={{ headerShown: false }}
       />
 
         <Stack.Screen

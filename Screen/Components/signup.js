@@ -41,7 +41,7 @@ const RegisterScreen = (props) => {
     let dataToSend = {username: userName, password: userPassword};
  
 
-    fetch('http://192.168.1.2:9000/users/signup', {
+    fetch('http://192.168.1.4:9000/users/signup', {
       method: 'POST',
       body: JSON.stringify(dataToSend),
       headers: {
